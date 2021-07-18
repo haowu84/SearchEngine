@@ -65,8 +65,7 @@ def parse(document, docid, index):
                 word_zones[word] = zone
             else:
                 #choose highest word zone
-                if zone > word_zones[word]:
-                    word_zones[word] = zone
+                word_zones[word] = max(zone, word_zones[word])
 
     #initialize the postings and add them to the index
     for token, frequency in count.items():
@@ -95,7 +94,7 @@ def champion_list(posting):
     return str(high_list) + "-" + str(low_list)
 
 
-def offload(file,index):
+def offload(file, index):
     with open (file,"w") as f:
         for k,v in index.items():
             f.write(str(k)+':')
@@ -105,7 +104,7 @@ def offload(file,index):
             f.write(str(temp)+'\n')
 
 
-def binary_merge(file1,file2,output_file, final, N):
+def binary_merge(file1, file2, output_file, final, N):
     with open(file1,"r") as f1, open(file2,"r") as f2, open(output_file,"w") as output:
         line1 = f1.readline()
         line2 = f2.readline()
@@ -159,7 +158,7 @@ def build_index():
         if url in urls:
             continue
         
-        docid = docid + 1 
+        docid += 1 
 
         urls[url] = docid  #map a unique id to the document
 
