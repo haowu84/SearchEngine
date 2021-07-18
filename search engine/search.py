@@ -40,11 +40,11 @@ def search(query):
     stemmer = PorterStemmer()
     stop_words = set(stopwords.words('english'))
 
-    parsed_query = [ stemmer.stem(word) for word in tokenizer.tokenize(query.lower()) if word not in stop_words] #parse the query and remove stop words
+    parsed_query = [stemmer.stem(word) for word in tokenizer.tokenize(query.lower()) if word not in stop_words] #parse the query and remove stop words
     if len(parsed_query) != 0:
         query = parsed_query
     else:
-        query = [ stemmer.stem(word) for word in tokenizer.tokenize(query.lower()) ]
+        query = [stemmer.stem(word) for word in tokenizer.tokenize(query.lower())]
 
     high_index = dict()
     low_index = dict()
@@ -59,7 +59,7 @@ def search(query):
             high_index[term] = eval(postings[0])
             low_index[term] = postings[1]
     
-    query = sorted(query, key = lambda x: len(high_index[x])) #sort the query terms in increasing frequency
+    query = sorted(query, key = lambda term: len(high_index[term])) #sort the query terms in increasing frequency
 
     scores, zones = compute_scores(query,high_index)
 
@@ -83,7 +83,7 @@ def search(query):
 
     print(time.time()-start)
     #print the top 10 results to the screen
-    for n in nlargest(k, heap, key = lambda x: x[0]):
+    for n in nlargest(k, heap, key = lambda term: term[0]):
         eel.printResults(urls[n[1]])
     
         
