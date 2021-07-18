@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+
+<html>
+    <head>
+	<style>
+	img {
+		display: block;
+		margin-left : auto;
+		margin-right: auto;
+	}
+	h1 {
+		color: Aqua;
+		font-family: "Copperplate", "Papyrus", fantasy;
+	}
+	body {
+		color: Aquamarine;
+		font-family: "Lucida Console", "Courier New", monospace;
+	}
+	div {
+		color: LightSeaGreen;
+	}
+	</style>
+        <script src="eel.js"></script>
+        <script>
+            function showSearch() {
+                var textbox = document.getElementById("query")
+				var outputDiv = document.getElementById("result");
+				
+				outputDiv.innerHTML = "";
+                text = textbox.value;
+                eel.begin_search(text);
+            }
+
+            eel.expose(printResults);
+            function printResults(url) {
+                var outputDiv = document.getElementById("result");
+                outputDiv.innerHTML += url + "<br/><br/>";
+            }
+        </script>
+    </head>
+    <body style="background-color:Black;">
+        <h1><center>
+			Eeny Meany Miny Moe Search!
+		</center></h1>
+		<img src="Spongebob_UCI.jpg" alt="What are you about to search?" height="300" width="435">
+		<p><center>
+			Enter Your Query:
+			<input type="text" id="query">
+			<button id="btn" onclick="showSearch()">Search</button>
+		</center></p>
+		<script>
+			var input = document.getElementById("query");
+			input.addEventListener("keyup", function(event){
+				if (event.keyCode === 13){
+					event.preventDefault();
+					document.getElementById("btn").click();
+				}
+			});
+		</script>
+		<div id="result">
+		</div>
+    </body>
+</html>
