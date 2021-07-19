@@ -35,10 +35,6 @@ python -m pip install -r packages/requirements.txt
 Set the options in the config.ini file. The following
 configurations exist.
 
-**USERAGENT**: Set the useragent to `IR F19 uci-id1,uci-id2,uci-id3`. 
-It is important to set the useragent appropriately to get the credit for 
-hitting our cache.
-
 **HOST**: This is the host name of our caching server. Please set it as per spec.
 
 **PORT**: THis is the port number of our caching server. Please set it as per spec.
